@@ -1,2 +1,15 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/';
+
+
+div {
+  border: 1px solid #000;
+}
+
+article {
+  @include make-row();
+  section{
+    @include make-xs-column(4);
+    border: 1px solid black;
+  }
+}
