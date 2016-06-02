@@ -40,6 +40,14 @@ const changePassword = function (data){
   });
 };
 
+const gameUpdate = function (val){
+  return $.ajax ({
+    url: app.host + "/games/:id",
+    method: 'PATCH',
+    data: val
+  })
+}
+
 
 
 module.exports = {

@@ -1,5 +1,5 @@
 'use strict';
-
+const gameLogic = require('../../../gameLogic.js');
 const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
@@ -36,12 +36,18 @@ const onChangePassword = function (event) {
   .fail(ui.failure);
 };
 
-//also used id=even.target
 const onMove = function (event) {
   event.preventDefault();
   let id = $(event.target).attr("id");
-  console.log(id);
+  let val = $(event.target).val();
+  gameLogic.setTileValue();
+  api.updateGame();
+  gameLogic.addToArray();
+  return id;
 };
+//addToArray uses this return
+
+
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);

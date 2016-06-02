@@ -1,13 +1,33 @@
 'use strict';
 
-const boardValue = {0:['x','o'], 1:['x','o'], 2: ['x','o'], 3: ['x','o'],
-4:['x','o'], 5:['x','o'], 6:['x','o'], 7: ['x','o'], 8: ['x','o']};
+const boardValue = {0:"", 1:"", 2: "", 3: "",
+4:"", 5:"", 6:"", 7: "", 8: ""};
 
-const playerOne = 'x';
-const playerTwo = 'o';
+const gameWinner = if ((boardValue[0] === boardValue[1]) && :"", 1:"", 2:""})
 
-const playerTurn = function (playerOne, playerTwo);
+const addToArray = function (onMove) {
+  id = onMove();
+  boardValue[id][value];
+  console.log(id);
+};
+let turn = 0;
+const setTileValue = function (tileId) {
+  event.preventDefault();
+  let tileId = onMove();
+  if (turn % 2 === 0) {
+   tileId.text('X');
+  } else  {
+   $('#tileId').text('O');
+  }
+  turn++;
+};
+//tileId also was event.target $()
 
-addToArray(id){
-  boardValue[id];
+//next -> getTileValue
+
+
+
+module.exports = {
+  setTileValue,
+  addToArray,
 };
