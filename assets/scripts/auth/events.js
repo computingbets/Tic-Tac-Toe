@@ -26,7 +26,7 @@ const onSignOut = function (event) {
   api.signOut()
   .done(ui.signOutSuccess)
   .fail(ui.signOutSuccess);
-}
+};
 
 const onChangePassword = function (event) {
   event.preventDefault();
@@ -34,13 +34,21 @@ const onChangePassword = function (event) {
   api.changePassword(data)
   .done(ui.success)
   .fail(ui.failure);
-}
+};
+
+//also used id=even.target
+const onMove = function (event) {
+  event.preventDefault();
+  let id = $(event.target).attr("id");
+  console.log(id);
+};
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
-  $('#sign-out').on('submit', onSignOut)
-  $('#change-password').on('submit', onChangePassword)
+  $('#sign-out').on('submit', onSignOut);
+  $('#change-password').on('submit', onChangePassword);
+  $('.col-xs-4').on('click', onMove);
 };
 
 module.exports = {
