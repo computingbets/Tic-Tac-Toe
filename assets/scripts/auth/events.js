@@ -52,9 +52,8 @@ const onCreateGame = function (event) {
 
 let turn = 0;
 const setTileValue = function (tileId) {
-  console.log('setting value');
-  //let tileId = $(event.target).attr("id");
-  if (turn % 2 == 0) {
+  //console.log('setting value');
+  if (turn % 2 === 0) {
    $('#'+tileId).text('X');
   } else  {
    $('#'+tileId).text('O');
@@ -64,12 +63,14 @@ const setTileValue = function (tileId) {
 const onMove = function (event) {
   event.preventDefault();
   let id = $(event.target).attr("id");
-  console.log('id is' + id);
-  //let val = $(event.target).val();
+  //console.log('id is' + id);
+
   setTileValue(id);
-  //addToArray();
-  //api.updateGame();
-  return id;
+  let val = $(event.target).text();
+  console.log(val);
+  addToArray(id, val);
+  //api.updateGame(val);
+  return [id, val];
 };
 //addToArray uses this return
 
@@ -85,17 +86,26 @@ const addHandlers = () => {
   $('#create-game').on('click', onCreateGame);
 };
 //
-// const boardValue = {0:"", 1:"", 2: "", 3: "",
-// 4:"", 5:"", 6:"", 7: "", 8: ""};
-//
+ const boardValue = {0 :"", 1 :"", 2 :"", 3 :"",
+4 : "", 5 :"", 6 :"", 7 :"", 8 :""};
+
+
+
+const addToArray = function (id, val) {
+// let together = onMove();
+// console.log(together);
+// let id = together[0];
+// let val = together[1];
+boardValue[id]=val;
+console.log(boardValue);
+};
+
+//addToArray();
+// console.log(boardValue);
 // const gameWinner = if ((boardValue[0] === boardValue[1]) &&
 // (boardValue[1] === boardValue[2]) && , 1:"", 2:""})
-//
-// const addToArray = function (onMove) {
-//   id = onMove();
-//   boardValue[id][value];
-//   console.log(id);
-// };
+
+
 //
 
 
