@@ -69,9 +69,25 @@ const onMove = function (event) {
   let val = $(event.target).text();
   console.log(val);
   addToArray(id, val);
+  referee(boardValue);
+  moveTaken(id, val);
   //api.updateGame(val);
   return [id, val];
 };
+
+const moveTaken = function (id, val) {
+  let tile = parseInt(id);
+  let value = val;
+  let takenTile = (event.target);
+  if (boardValue[tile] !== '') {
+      $(takenTile).off('click');
+    // console.log(value + 'already has this spot!');
+    } else {
+      boardValue[tile] = value;
+    }
+};
+
+
 //addToArray uses this return
 
 
@@ -86,33 +102,69 @@ const addHandlers = () => {
   $('#create-game').on('click', onCreateGame);
 };
 //
- const boardValue = {0 :"", 1 :"", 2 :"", 3 :"",
-4 : "", 5 :"", 6 :"", 7 :"", 8 :""};
+ const boardValue = ["", "", "", "",
+"", "", "", "", ""];
 
 
 
 const addToArray = function (id, val) {
-// let together = onMove();
-// console.log(together);
-// let id = together[0];
-// let val = together[1];
 boardValue[id]=val;
 console.log(boardValue);
 };
-
-//addToArray();
-// console.log(boardValue);
-// const gameWinner = if ((boardValue[0] === boardValue[1]) &&
-// (boardValue[1] === boardValue[2]) && , 1:"", 2:""})
+let winner = false;
 
 
-//
+const referee = function (boardValue) {
+//  event.preventDefault();
+//  console.log('Gameboard' + boardValue);
+  if (
+      ((boardValue[0] === boardValue[1]) && (boardValue[2] === boardValue[0]) && boardValue[0]==='X') ||
+      ((boardValue[3] === boardValue[4]) && (boardValue[5] === boardValue[3]) && boardValue[3] ==='X') ||
+      ((boardValue[6] === boardValue[7]) && (boardValue[8] === boardValue[6]) && boardValue[6] ==='X') ||
+      ((boardValue[0] === boardValue[3]) && (boardValue[6] === boardValue[0]) && boardValue[0] ==='X') ||
+      ((boardValue[1] === boardValue[4]) && (boardValue[7] === boardValue[1]) && boardValue[1] ==='X') ||
+      ((boardValue[2] === boardValue[5]) && (boardValue[8] === boardValue[2]) && boardValue[2] ==='X') ||
+      ((boardValue[0] === boardValue[4]) && (boardValue[8] === boardValue[0]) && boardValue[0] ==='X') ||
+      ((boardValue[2] === boardValue[4]) && (boardValue[6] === boardValue[2]) && boardValue[2] ==='X')) {
+        console.log("winner_x");
+          winner = true;
+          window.alert("X wins!");
+          // console.log("The winner is: x");
+          // console.log("Winner value " + winner);
+        } else if (((boardValue[0] === boardValue[1]) && (boardValue[2] === boardValue[0]) && boardValue[0] ==='O') ||
+      ((boardValue[3] === boardValue[4]) && (boardValue[5] === boardValue[3]) && boardValue[3] ==='O') ||
+      ((boardValue[6] === boardValue[7]) && (boardValue[8] === boardValue[6]) && boardValue[6] ==='O') ||
+      ((boardValue[0] === boardValue[3]) && (boardValue[6] === boardValue[0]) && boardValue[0] ==='O') ||
+      ((boardValue[1] === boardValue[4]) && (boardValue[7] === boardValue[1]) && boardValue[1] ==='O') ||
+      ((boardValue[2] === boardValue[5]) && (boardValue[8] === boardValue[2]) && boardValue[2] ==='O') ||
+      ((boardValue[0] === boardValue[4]) && (boardValue[8] === boardValue[0]) && boardValue[0] ==='O') ||
+      ((boardValue[2] === boardValue[4]) && (boardValue[6] === boardValue[2]) && boardValue[2] ==='O')) {
+          winner = true;
+      //    $(document).text("<div>Player O won the game!</div>");
+          //div in HTML with this junk and then hide on document load and then show when win/loss/tie occurs
+           console.log("The winner is: o");
+           window.alert("O wins!");
+          // console.log("Winner value " + winner);
+        } else if (boardValue.indexOf('') === -1) {
+          window.alert("Cats' game");
+          // console.log ("The game continues");
+          // console.log("Winner value " + winner);
+        } else {
+
+          // console.log("Winner value " + winner);
+        }
+        // for (let i = 0; i < gameBoard.length; i++) {
+        //   if (gameBoard[i] !== '') {
+        //
+        //   }
+        //}
+//      console.log(gameBoard);
+//    return winner;
+};
 
 
 
-//tileId also was event.target $()
 
-//next -> getTileValue
 module.exports = {
   addHandlers,
 };
