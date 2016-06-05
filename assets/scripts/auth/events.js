@@ -4,6 +4,7 @@ const getFormFields = require('../../../lib/get-form-fields');
 const api = require('./api');
 const ui = require('./ui');
 
+
 const onSignUp = function (event) {
   event.preventDefault();
   let data =  getFormFields(event.target);
@@ -36,18 +37,22 @@ const onChangePassword = function (event) {
 };
 
 const onUpdateGame = function (event) {
-  event.preventDefault();
-  let data = getFormFields(event.target);
-  api.updateGame(data)
-  .done(ui.success)
-  .fail(ui.failure);
+ let index = event.target.id;
+let val = $(event.target).text();
+let gameId = $('#game-board').val();
+  console.log('THE INDEX IS' + index);
+  console.log('THE VALUE IS'+val);
+  api.updateGame(index, val, gameId)
+    .done(ui.createSuccess)
+    .fail(ui.failure);
 };
 
 const onCreateGame = function (event) {
   event.preventDefault();
   api.createGame()
-  .done(ui.success)
+  .done(ui.createSuccess)
   .fail(ui.failure);
+  $('.col-xs-4').val('');
 };
 
 let turn = 0;
@@ -71,7 +76,7 @@ const onMove = function (event) {
   addToArray(id, val);
   referee(boardValue);
   moveTaken(id, val);
-  //api.updateGame(val);
+  //onUpdateGame(id, val);
   return [id, val];
 };
 
@@ -98,13 +103,16 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut);
   $('#change-password').on('submit', onChangePassword);
   $('.col-xs-4').on('click', onMove);
-  $('#update-game').on('click', onUpdateGame);
+  $('.col-xs-4').on('click', onUpdateGame);
   $('#create-game').on('click', onCreateGame);
 };
 //
  const boardValue = ["", "", "", "",
 "", "", "", "", ""];
 
+// clearBoard = function () {
+//   $('col-xs-4').empty();
+// }
 
 
 const addToArray = function (id, val) {
@@ -112,6 +120,7 @@ boardValue[id]=val;
 console.log(boardValue);
 };
 let winner = false;
+let boardValueIndex = "";
 
 
 const referee = function (boardValue) {
@@ -129,6 +138,7 @@ const referee = function (boardValue) {
         console.log("winner_x");
           winner = true;
           window.alert("X wins!");
+          $('.col-xs-4').off('click');
           // console.log("The winner is: x");
           // console.log("Winner value " + winner);
         } else if (((boardValue[0] === boardValue[1]) && (boardValue[2] === boardValue[0]) && boardValue[0] ==='O') ||

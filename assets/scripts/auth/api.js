@@ -1,5 +1,6 @@
 'use strict';
 const app = require('../app.js');
+const ui = require('./ui');
 
 const signUp = (data) => {
 
@@ -40,25 +41,6 @@ const changePassword = function (data){
   });
 };
 
-const updateGame = function (){
-  return $.ajax({
-    url: app.host + "/games/" + app.user.id,
-    method: 'PATCH',
-    headers: {
-    Authorization: 'Token token=' + app.user.token,
-    },
-    data: {
-            "game": {
-              "cell": {
-                  "index": app.game.index,
-                  "value": app.game.value,
-          },
-          "over": app.over,
-        }
-      }
-  });
-};
-
 const createGame = function (){
   return $.ajax({
     url: app.host + "/games",
@@ -66,6 +48,26 @@ const createGame = function (){
     headers: {
     Authorization: 'Token token=' + app.user.token,
     },
+  });
+};
+
+const updateGame = function (index, value, gameId){
+    console.log(ui.createdGame);
+  return $.ajax({
+    url: app.host + "/games/" + gameId,
+    method: 'PATCH',
+    headers: {
+    Authorization: 'Token token=' + app.user.token,
+    },
+    data: {
+            "game": {
+              "cell": {
+                  "index": index,
+                  "value": value,
+          }
+
+        }
+      }
   });
 };
 
