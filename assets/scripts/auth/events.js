@@ -1,8 +1,5 @@
 'use strict';
-<<<<<<< HEAD
 const gameLogic = require('../../../gameLogic.js');
-=======
->>>>>>> ttttwopointtwo
 const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
@@ -43,16 +40,16 @@ const onChangePassword = function (event) {
   .fail(ui.failure);
 };
 
-<<<<<<< HEAD
-const onMove = function (event) {
-  event.preventDefault();
-  let id = $(event.target).attr("id");
-  let val = $(event.target).val();
-  gameLogic.setTileValue();
-  api.updateGame();
-  gameLogic.addToArray();
-  return id;
-=======
+
+// const onMove = function (event) {
+//   event.preventDefault();
+//   let id = $(event.target).attr("id");
+//   let val = $(event.target).val();
+//   gameLogic.setTileValue();
+//   api.updateGame();
+//   gameLogic.addToArray();
+//   return id;
+
 const onUpdateGame = function (event) {
  let index = event.target.id;
 let val = $(event.target).text();
@@ -168,22 +165,15 @@ const referee = function (boardValue) {
       ((boardValue[0] === boardValue[4]) && (boardValue[8] === boardValue[0]) && boardValue[0] ==='O') ||
       ((boardValue[2] === boardValue[4]) && (boardValue[6] === boardValue[2]) && boardValue[2] ==='O')) {
           winner = true;
-      //    $(document).text("<div>Player O won the game!</div>");
-          //div in HTML with this junk and then hide on document load and then show when win/loss/tie occurs
            console.log("The winner is: o");
            window.alert("O wins!");
-          // console.log("Winner value " + winner);
         } else if (boardValue.indexOf('') === -1) {
           window.alert("Cats' game");
-          // console.log ("The game continues");
-          // console.log("Winner value " + winner);
         } else {
 
 
-          // console.log("Winner value " + winner);
         }
-        // for (let i = 0; i < gameBoard.length; i++) {
-        //   if (gameBoard[i] !== '') {
+
         //
         //   }
         //}
