@@ -181,17 +181,17 @@ const referee = function (boardValue) {
 //    return winner;
 };
 
-const boardOff =  function () {
-  let game = 'fun';
-  if (winner){
-  $('.col-xs-4').addClass('gameOver');
-  console.log($('.col-xs-4'));
-} else if ($('#0').hasClass('.gameOver')){
-   $('.gameOver').off('click');
- } else {
-   let game = 'funn';
- }
-};
+// const boardOff =  function () {
+//   let game = 'fun';
+//   if (winner){
+//   $('.col-xs-4').addClass('gameOver');
+//   console.log($('.col-xs-4'));
+// } else if ($('#0').hasClass('.gameOver')){
+//    $('.gameOver').off('click');
+//  } else {
+//    let game = 'funn';
+//  }
+// };
 module.exports = {
   addHandlers,
 };
