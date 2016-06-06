@@ -4,6 +4,9 @@ const getFormFields = require('../../../lib/get-form-fields');
 const api = require('./api');
 const ui = require('./ui');
 
+let winner = false;
+let boardValueIndex = "";
+let turn = 0;
 
 const onSignUp = function (event) {
   event.preventDefault();
@@ -40,8 +43,8 @@ const onUpdateGame = function (event) {
  let index = event.target.id;
 let val = $(event.target).text();
 let gameId = $('#game-board').val();
-  console.log('THE INDEX IS' + index);
-  console.log('THE VALUE IS'+val);
+  // console.log('THE INDEX IS' + index);
+  // console.log('THE VALUE IS'+val);
   api.updateGame(index, val, gameId)
     .done(ui.createSuccess)
     .fail(ui.failure);
@@ -52,10 +55,10 @@ const onCreateGame = function (event) {
   api.createGame()
   .done(ui.createSuccess)
   .fail(ui.failure);
-  $('.col-xs-4').val('');
+  $('.col-xs-4').text("");
 };
 
-let turn = 0;
+
 const setTileValue = function (tileId) {
   //console.log('setting value');
   if (turn % 2 === 0) {
@@ -64,6 +67,7 @@ const setTileValue = function (tileId) {
    $('#'+tileId).text('O');
   }
   turn++;
+  // onUpdateGame(id, val);
 };
 const onMove = function (event) {
   event.preventDefault();
@@ -72,11 +76,11 @@ const onMove = function (event) {
 
   setTileValue(id);
   let val = $(event.target).text();
-  console.log(val);
+  //console.log(val);
   addToArray(id, val);
   referee(boardValue);
   moveTaken(id, val);
-  //onUpdateGame(id, val);
+  boardOff();
   return [id, val];
 };
 
@@ -87,7 +91,7 @@ const moveTaken = function (id, val) {
   if (boardValue[tile] !== '') {
       $(takenTile).off('click');
     // console.log(value + 'already has this spot!');
-    } else {
+  } else {
       boardValue[tile] = value;
     }
 };
@@ -119,13 +123,9 @@ const addToArray = function (id, val) {
 boardValue[id]=val;
 console.log(boardValue);
 };
-let winner = false;
-let boardValueIndex = "";
-
 
 const referee = function (boardValue) {
 //  event.preventDefault();
-//  console.log('Gameboard' + boardValue);
   if (
       ((boardValue[0] === boardValue[1]) && (boardValue[2] === boardValue[0]) && boardValue[0]==='X') ||
       ((boardValue[3] === boardValue[4]) && (boardValue[5] === boardValue[3]) && boardValue[3] ==='X') ||
@@ -138,7 +138,7 @@ const referee = function (boardValue) {
         console.log("winner_x");
           winner = true;
           window.alert("X wins!");
-          $('.col-xs-4').off('click');
+          //$('.col-xs-4').off('click');
           // console.log("The winner is: x");
           // console.log("Winner value " + winner);
         } else if (((boardValue[0] === boardValue[1]) && (boardValue[2] === boardValue[0]) && boardValue[0] ==='O') ||
@@ -161,6 +161,7 @@ const referee = function (boardValue) {
           // console.log("Winner value " + winner);
         } else {
 
+
           // console.log("Winner value " + winner);
         }
         // for (let i = 0; i < gameBoard.length; i++) {
@@ -172,9 +173,17 @@ const referee = function (boardValue) {
 //    return winner;
 };
 
-
-
-
+const boardOff =  function () {
+  let game = 'fun';
+  if (winner){
+  $('.col-xs-4').addClass('gameOver');
+  console.log($('.col-xs-4'));
+} else if ($('#0').hasClass('.gameOver')){
+   $('.gameOver').off('click');
+ } else {
+   let game = 'funn';
+ }
+};
 module.exports = {
   addHandlers,
 };
