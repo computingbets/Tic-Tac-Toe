@@ -105,7 +105,6 @@ const moveTaken = function (id, val) {
   } else {
       boardValue[tile] = value;
     }
->>>>>>> ttttwopointtwo
 };
 //addToArray uses this return
 
@@ -183,7 +182,7 @@ const referee = function (boardValue) {
 
 const boardOff =  function () {
   let game = 'fun';
-  if (winner){
+  if (winner) {
   $('.col-xs-4').addClass('gameOver');
 //   console.log($('.col-xs-4'));
 // } else if ($('#0').hasClass('.gameOver')){

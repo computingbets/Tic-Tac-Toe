@@ -41,16 +41,6 @@ const changePassword = function (data){
   });
 };
 
-<<<<<<< HEAD
-const gameUpdate = function (val){
-  return $.ajax ({
-    url: app.host + "/games/:id",
-    method: 'PATCH',
-    data: val
-  })
-}
-
-=======
 const createGame = function (){
   return $.ajax({
     url: app.host + "/games",
@@ -60,7 +50,6 @@ const createGame = function (){
     },
   });
 };
->>>>>>> ttttwopointtwo
 
 const updateGame = function (index, value, gameId){
     console.log(ui.createdGame);
