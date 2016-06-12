@@ -1,10 +1,11 @@
 'use strict';
-const gameLogic = require('../../../gameLogic.js');
 const getFormFields = require('../../../lib/get-form-fields');
-
 const api = require('./api');
 const ui = require('./ui');
+const app = require('../app');
 
+let boardValue = ["", "", "", "",
+"", "", "", "", ""];
 let winner = false;
 let boardValueIndex = "";
 let turn = 0;
@@ -40,22 +41,12 @@ const onChangePassword = function (event) {
   .fail(ui.failure);
 };
 
-
-// const onMove = function (event) {
-//   event.preventDefault();
-//   let id = $(event.target).attr("id");
-//   let val = $(event.target).val();
-//   gameLogic.setTileValue();
-//   api.updateGame();
-//   gameLogic.addToArray();
-//   return id;
-
 const onUpdateGame = function (event) {
- let index = event.target.id;
-let val = $(event.target).text();
-let gameId = $('#game-board').val();
-  // console.log('THE INDEX IS' + index);
-  // console.log('THE VALUE IS'+val);
+  let index = event.target.id;
+  let val = $(event.target).text();
+  let gameId = $('#game-board').val();
+  //  console.log('THE INDEX IS' + index);
+  //  console.log('THE VALUE IS'+val);
   api.updateGame(index, val, gameId)
     .done(ui.createSuccess)
     .fail(ui.failure);
@@ -69,6 +60,29 @@ const onCreateGame = function (event) {
   $('.col-xs-4').text("");
 };
 
+const onStats = function (event) {
+  event.preventDefault();
+  console.log('StatS!');
+  api.getStats()
+  .done(ui.statsSuccess)
+  .fail(ui.failure);
+}
+
+const onNewGame = function (event) {
+  event.preventDefault();
+  winner = false;
+    boardValue = ['', '', '', '', '', '', '', '', ''];
+    turn = 0;
+    boardValueIndex = '';
+  // api.newGame()
+  // .done(ui.success)
+  // .fail(ui.failure);
+   console.log('newgame');
+  // if ($('.col-xs-4').hasClass('gameOver')) {
+  $('.col-xs-4').text('');
+  $('.col-xs-4').removeClass('gameOver');
+  addHandlers();
+};
 
 const setTileValue = function (tileId) {
   //console.log('setting value');
@@ -92,6 +106,8 @@ const onMove = function (event) {
   referee(boardValue);
   moveTaken(id, val);
   boardOff();
+  keepBoardOff();
+  onUpdateGame();
   return [id, val];
 };
 
@@ -121,21 +137,20 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut);
   $('#change-password').on('submit', onChangePassword);
   $('.col-xs-4').on('click', onMove);
-  $('.col-xs-4').on('click', onUpdateGame);
+  // $('.col-xs-4').on('click', onUpdateGame);
   $('#create-game').on('click', onCreateGame);
+  $('#new-game').on('click', onNewGame)
+  $('#stats').on('click', onStats)
 };
-//
- const boardValue = ["", "", "", "",
-"", "", "", "", ""];
-
-// clearBoard = function () {
-//   $('col-xs-4').empty();
-// }
-
 
 const addToArray = function (id, val) {
 boardValue[id]=val;
-console.log(boardValue);
+app.game.cells[id] = val;
+console.log(app.game.cells);
+api.updateGame()
+  .done(ui.updateSuccess)
+  .fail(ui.failure);
+
 };
 
 const referee = function (boardValue) {
@@ -181,16 +196,23 @@ const referee = function (boardValue) {
 };
 
 const boardOff =  function () {
-  let game = 'fun';
+  // let game = 'fun';
   if (winner) {
   $('.col-xs-4').addClass('gameOver');
 //   console.log($('.col-xs-4'));
-// } else if ($('#0').hasClass('.gameOver')){
-//    $('.gameOver').off('click');
+
 //  } else {
 //    let game = 'funn';
-//  }
-// };
+ }
+ };
+
+const keepBoardOff = function () {
+  if ($('.col-xs-4').hasClass('gameOver')){
+   $('.gameOver').off('click');
+}
+};
+
+ // $('.col-xs-4').text("");
 module.exports = {
   addHandlers,
 };

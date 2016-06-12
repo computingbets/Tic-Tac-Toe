@@ -27,9 +27,19 @@ const signOutSuccess = function (){
 };
 
 const createSuccess = function(data) {
-  createdGame = data.game.id;
+  console.log(data.game)
+  app.game = data.game;
   $('#game-board').val(createdGame);
 };
+
+const statsSuccess = function(data) {
+  console.log(data.games)
+  $('.stats').append('Number of games played:' + data.games.length)
+};
+
+const updateSuccess = function(data) {
+  console.log(data)
+}
 
 module.exports = {
   failure,
@@ -38,4 +48,6 @@ module.exports = {
   signOutSuccess,
   createSuccess,
   createdGame,
+  statsSuccess,
+  updateSuccess,
 };

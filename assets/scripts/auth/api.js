@@ -54,24 +54,21 @@ const createGame = function (){
 const updateGame = function (index, value, gameId){
     console.log(ui.createdGame);
   return $.ajax({
-    url: app.host + "/games/" + gameId,
+    url: app.host + "/games/" + app.game.id,
     method: 'PATCH',
     headers: {
     Authorization: 'Token token=' + app.user.token,
     },
     data: {
             "game": {
-              "cell": {
-                  "index": index,
-                  "value": value,
-          }
+              "cells": app.game.cells
 
         }
       }
   });
 };
 
-const showGames = function() {
+const getStats = function() {
   return $.ajax({
     url: app.host + '/games/',
     method: 'GET',
@@ -103,4 +100,5 @@ module.exports = {
   updateGame,
   createGame,
   gameOver,
+  getStats,
 };
