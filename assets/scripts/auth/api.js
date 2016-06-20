@@ -51,22 +51,25 @@ const createGame = function (){
   });
 };
 
-const updateGame = function (index, value, gameId){
-    console.log(ui.createdGame);
-  return $.ajax({
-    url: app.host + "/games/" + app.game.id,
-    method: 'PATCH',
-    headers: {
-    Authorization: 'Token token=' + app.user.token,
-    },
-    data: {
-            "game": {
-              "cells": app.game.cells
-
-        }
-      }
-  });
-};
+const updateGame = function (index, value) {
+    // console.log(ui.createdGame);
+      return $.ajax({
+        url: app.host + "/games/" + app.game.id,
+        method: 'PATCH',
+        headers: {
+        Authorization: 'Token token=' + app.user.token,
+        },
+        data: {
+                "game": {
+                  "cell": {
+                    "index": index,
+                    "value": value,
+                  },
+                  "over": false
+                }
+              }
+      });
+  };
 
 const getStats = function() {
   return $.ajax({
