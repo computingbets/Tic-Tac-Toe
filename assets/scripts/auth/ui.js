@@ -8,7 +8,7 @@ const success = (data) => {
   if(data){
     console.log(data);
 } else {
-  console.log('fuck yeyeah');
+    console.log('fuck yeyeah');
 }
 };
 
@@ -27,19 +27,19 @@ const signOutSuccess = function (){
 };
 
 const createSuccess = function(data) {
-  console.log(data.game)
+  console.log(data.game);
   app.game = data.game;
   $('#game-board').val(createdGame);
 };
 
 const statsSuccess = function(data) {
-  console.log(data.games)
-  $('.stats').append('Number of games played:' + data.games.length)
+  //console.log(data.games)
+  $('.stats').append('Number of games played:' + data.games.length);
 };
 
 const updateSuccess = function(data) {
-  console.log(data)
-}
+  console.log(data);
+};
 
 module.exports = {
   failure,

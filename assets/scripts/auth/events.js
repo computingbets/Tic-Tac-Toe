@@ -43,14 +43,14 @@ const onChangePassword = function (event) {
 
 //This is supposed to get the div # and
 // get x or o and put that into db
-const onUpdateGame = function (event) {
+const onUpdateGame = function () {
   let index = event.target.id;
   let val = $(event.target).text();
   let gameId = $('#game-board').val();
   //  console.log('THE INDEX IS' + index);
   //  console.log('THE VALUE IS'+val);
   api.updateGame(index, val, gameId)
-    .done(ui.createSuccess)
+    .done(ui.updateSuccess)
     .fail(ui.failure);
 };
 
@@ -59,14 +59,14 @@ const onCreateGame = function (event) {
   api.createGame()
   .done(ui.createSuccess)
   .fail(ui.failure);
-  winner = false;
-  boardValue = ['', '', '', '', '', '', '', '', ''];
-  turn = 0;
-  boardValueIndex = '';
-  console.log('newgame');
-  $('.col-xs-4').text("");
-  $('.col-xs-4').removeClass('gameOver');
-  $('.gameOver').on('click', onMove);
+  // winner = false;
+  // boardValue = ['', '', '', '', '', '', '', '', ''];
+  // turn = 0;
+  // boardValueIndex = '';
+  // console.log('newgame');
+  // $('.col-xs-4').text("");
+  // $('.col-xs-4').removeClass('gameOver');
+  // $('.gameOver').on('click', onMove);
 };
 
 const onStats = function (event) {
@@ -83,19 +83,21 @@ const onGameOver = function () {
   api.gameOver()
   .done(ui.success)
   .fail(ui.failure);
+  console.log('gameOverAPI')
 }
 };
-// const onNewGame = function (event) {
-//   event.preventDefault();
-//   winner = false;
-//     boardValue = ['', '', '', '', '', '', '', '', ''];
-//     turn = 0;
-//     boardValueIndex = '';
-//    console.log('newgame');
-//   $('.col-xs-4').text('');
-//   $('.col-xs-4').removeClass('gameOver');
-//   // addHandlers(); should not have to
-// };
+const onNewGame = function (event) {
+  event.preventDefault();
+  winner = false;
+    boardValue = ['', '', '', '', '', '', '', '', ''];
+    turn = 0;
+    boardValueIndex = '';
+  // console.log('newgame');
+  $('.col-xs-4').text('');
+  $('.col-xs-4').removeClass('gameOver');
+  addHandlers();
+  onNewGame();
+};
 
 const setTileValue = function (tileId) {
   //console.log('setting value');
@@ -147,10 +149,6 @@ const addToArray = function (id, val) {
 boardValue[id]=val;
 //app.game.cells[id] = val;
 //console.log(app.game.cells);
-api.updateGame(id, val)
-  .done(ui.updateSuccess)
-  .fail(ui.failure);
-
 };
 
 const referee = function (boardValue) {
@@ -164,7 +162,7 @@ const referee = function (boardValue) {
       ((boardValue[2] === boardValue[5]) && (boardValue[8] === boardValue[2]) && boardValue[2] ==='X') ||
       ((boardValue[0] === boardValue[4]) && (boardValue[8] === boardValue[0]) && boardValue[0] ==='X') ||
       ((boardValue[2] === boardValue[4]) && (boardValue[6] === boardValue[2]) && boardValue[2] ==='X')) {
-        console.log("winner_x");
+        //console.log("winner_x");
           winner = true;
           window.alert("X wins!");
           onGameOver();
@@ -180,7 +178,7 @@ const referee = function (boardValue) {
       ((boardValue[0] === boardValue[4]) && (boardValue[8] === boardValue[0]) && boardValue[0] ==='O') ||
       ((boardValue[2] === boardValue[4]) && (boardValue[6] === boardValue[2]) && boardValue[2] ==='O')) {
           winner = true;
-           console.log("The winner is: o");
+          // console.log("The winner is: o");
            window.alert("O wins!");
            onGameOver();
         } else if (boardValue.indexOf('') === -1) {
@@ -223,7 +221,7 @@ const addHandlers = () => {
   $('.col-xs-4').on('click', onMove);
   // $('.col-xs-4').on('click', onUpdateGame);
   $('#create-game').on('click', onCreateGame);
-  // $('#new-game').on('click', onNewGame)
+  $('#new-game').on('click', onNewGame)
   $('#stats').on('click', onStats);
 };
  // $('.col-xs-4').text("");
