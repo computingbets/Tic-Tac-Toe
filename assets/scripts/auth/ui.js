@@ -29,12 +29,13 @@ const signOutSuccess = function (){
 const createSuccess = function(data) {
   console.log(data.game);
   app.game = data.game;
-  $('#game-board').val(createdGame);
+  console.log('we up in createSuccess')
+  //$('#game-board').val(createdGame);
 };
 
 const statsSuccess = function(data) {
   //console.log(data.games)
-  $('.stats').append('Number of games played:' + data.games.length);
+  $('.stats').append('Number of games played: ' + data.games.length);
 };
 
 const updateSuccess = function(data) {

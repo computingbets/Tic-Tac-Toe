@@ -82,19 +82,22 @@ const getStats = function() {
 };
 
 const gameOver = function() {
-    return $.ajax({
-      url: app.host + '/games/' + app.game.id,
-      method: 'PATCH',
-      headers: {
-        Authorization: 'Token token=' + app.user.token,
-      },
-      data: {
-              "game": {
-              "over": true,
-          }
-        }
-      });
-    };
+  console.log("You're inside gameOver");
+  console.log("app.game is ", app.game);
+  return $.ajax({
+    url: app.host + '/games/' + app.game.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+    data: {
+      "game": {
+        "over": true,
+      }
+    }
+  });
+};
+
 module.exports = {
   signUp,
   signIn,

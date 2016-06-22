@@ -78,16 +78,21 @@ const onStats = function (event) {
 };
 
 const onGameOver = function () {
-  if (winner) {
-    console.log('gameoverstarts');
+  $('.col-xs-4').off('click');
+  console.log('gameoverstarts');
   api.gameOver()
   .done(ui.success)
   .fail(ui.failure);
-  console.log('gameOverAPI')
-}
+  console.log('gameOverEnds');
 };
+
 const onNewGame = function (event) {
   event.preventDefault();
+  $('.col-xs-4').on('click', onMove);
+  console.log("this is a new game");
+  console.log("winner is ", winner);
+  console.log("turn is ", turn);
+  console.log("boardValue is ", boardValue);
   winner = false;
     boardValue = ['', '', '', '', '', '', '', '', ''];
     turn = 0;
@@ -95,8 +100,10 @@ const onNewGame = function (event) {
   // console.log('newgame');
   $('.col-xs-4').text('');
   $('.col-xs-4').removeClass('gameOver');
-  addHandlers();
-  onNewGame();
+  //addHandlers();
+  api.createGame()
+  .done(ui.createSuccess)
+  .fail(ui.failure);
 };
 
 const setTileValue = function (tileId) {
@@ -107,23 +114,24 @@ const setTileValue = function (tileId) {
    $('#'+tileId).text('O');
   }
   turn++;
+  console.log('turn is ', turn);
   // onUpdateGame(id, val);
 };
 const onMove = function (event) {
   event.preventDefault();
   let id = $(event.target).attr("id");
-  //console.log('id is' + id);
+  console.log('id is' + id);
 
   setTileValue(id);
   let val = $(event.target).text();
-  //console.log(val);
+  console.log('val is ' + val);
   addToArray(id, val);
+  onUpdateGame();
   referee(boardValue);
   moveTaken(id, val);
-  boardOff();
-  keepBoardOff();
-  onUpdateGame();
-  onGameOver();
+  // boardOff();
+  // keepBoardOff();
+  //onGameOver();
   return [id, val];
 };
 
@@ -196,22 +204,22 @@ const referee = function (boardValue) {
 //    return winner;
 };
 
-const boardOff =  function () {
-  // let game = 'fun';
-  if (winner) {
-  $('.col-xs-4').addClass('gameOver');
-//   console.log($('.col-xs-4'));
+// const boardOff =  function () {
+//   // let game = 'fun';
+//   if (winner) {
+//   $('.col-xs-4').addClass('gameOver');
+// //   console.log($('.col-xs-4'));
+//
+// //  } else {
+// //    let game = 'funn';
+//  }
+//  };
 
-//  } else {
-//    let game = 'funn';
- }
- };
-
-const keepBoardOff = function () {
-  if ($('.col-xs-4').hasClass('gameOver')){
-   $('.gameOver').off('click');
-}
-};
+// const keepBoardOff = function () {
+//   if ($('.col-xs-4').hasClass('gameOver')){
+//    $('.gameOver').off('click');
+//  }
+// };
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
