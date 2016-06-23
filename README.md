@@ -1,129 +1,22 @@
 ![General Assembly Logo](http://i.imgur.com/ke8USTq.png)
 
-# Using curl and jQuery.ajax to access an authenticated API
+## John Staley aka logicmyth's client project one!
 
-## Introduction
+#### What App This Is
+This app is a single page aplication that features a tic-tac-toe game. In addition, it features sign-in, sign-out, password features, retrieval of game stats, and database storage of player moves and each individual game.
 
-We'll use `curl` and `$.ajax` with html forms to sign up, sign in, and sign out
- of an API.
-We'll also change our passwords.
-The API uses Token authentication and we'll see how to make authenticated
- request (sign out and change password).
+####Languages Used
+This app implements javascript, html, and bootstrap css.
 
-## Objectives
+####Programming Challenges and Solutions
+Programming this app had some problems forseen and unforseen. The slow pace of starting conflicted with time constraints, however this problem was overcome by references to coder bases both in class and online. That is, referring to another coder helped greatly and getting a new set of eyes on code made this app possible. Another issue came presented itself in the final stages of programming. This occured when testing the app and realizing that fixing one bug uncovered several new ones. The solution of said issue was that this programmer coded addHandlers in the new/restart game function(as a quick fix to the replayable board feature), which duplicated ajax calls and set turns to not go up by one after two games. After sitting with a colleague, I realized that I had to remove addHandlers and only call one particular function from the whole handlers group. This process of discovering issues proved challenging and taught me that being resourceful is an essential quality in a programmer.
 
-By the end of this, students should be able to:
+####User Stories and Wireframes
 
--   Use `curl` to access an authenticated API.
--   Use `$.ajax` to access an authenticated API.
+User stories - As a user I want to play a game of tic-tac-toe and restart the game. As a user I want to sign-in and sign-out when I play tic tac toe. As a user I want to get the number of games that I played.
 
-## Instructions
+Wireframes - http://imgur.com/qmmRmCN
 
-Fork, clone, branch, and npm install.
-
-## Using web APIs
-
-Web APIs often require some sort of authentication.  The game API requires users
- to register and then login to gain an authentication token.
-
-We'll use `curl`, `httpbin.org`, and `jQuery.ajax` to explore HTTP further.
-The we'l connect to an authenticated API, [library-api](https://github.com/ga-wdi-boston/library-api).
-
-The operations we'll perform:
-
-| verb   | path                   | parameters |
-| ----   | ----                   | ---------- |
-| POST   | `/sign-up`             | `credentials` containing `email`, `password`, `password_confirmation` |
-| POST   | `/sign-in`             | `credentials` containing `email` and `password` (response contains auth data) |
-| PATCH  | `/change-password/:id` | `passwords` containing `old` and `new` (requires Authorization header) |
-| DELETE | `/sign-out/:id`        | None (requires Authorization header) |
-
-### Registering with the API
-
-#### Demonstration
-
-First we'll test our command against an echo server to make sure we're sending
- the right data.
-There's no need to use an actual e-mail address and don't use anything you might
- want to actually use as a password.
-
-We'll use `scripts/sign-up[-json].sh` to run curl, first sending JSON then
- sending data the way the browser does by default.
-We'll see how the server treats both ways of sending data (it's all just
- strings) in a similar way.
-
-If we left out the `--include` flag we wouldn't see the response header.
-What's the benefit of using an echo server?
-
-#### Code along
-
-Next we'll want to actually register with the API.
-
-We'll modify `scripts/sign-up[-json].sh` to connect to the `library-api`.
-
-#### Code along again
-
-Now let's put code into `assests/scripts/auth/*` to get another "e-mail"
- address registered with the API.  We'll again start with the echo server.
-
-### Logging into the API
-
-#### Demonstration
-
-We'll use `scripts/sign-in-json.sh`.
-
-#### Code along
-
-Now with url encoded data in `scripts/sign-in.sh`.
-
-#### Lab
-
-Add a form to `index.html` and code to `assets/scripts/auth/*` to login to
- the API.
-You may want to start by using the echo service to check your request.
-
-What should we do with the data returned by the API?
-
-### Changing the password
-
-#### Code along
-
-We'll use `scripts/change-password[-json].sh` to change a password.
-After that we'll verify that we can no longer authenticate using the old
- password.
-
-#### Lab
-
-Add a change password form to `index.html` and code to
- `assets/scripts/auth/*` to change the password.
-
-### Signing out
-
-Signing out invalidates the the current token.
-
-#### Code along
-
-We'll use `scripts/sign-out.sh` to sign out of the API.
-We'll verify that the token we used is no longer valid.
-
-#### Lab
-
-Add a sign out form to `index.html` and code to `assets/scripts/auth/*` to
- sign out of the API.
-
-## Tasks
-
-Developers should run these often!
-
--   `grunt nag` or just `grunt`: runs code quality analysis tools on your code
-    and complains
--   `grunt reformat`: reformats all your code in a standard style
--   `grunt serve`: generates bundles, watches, and livereloads
--   `grunt test`: runs any automated tests, depends on `grunt build`
--   `grunt build`: place bundled styles and scripts where `index.html` can find
-    them
-
-## [License](LICENSE)
-
-Source code distributed under the MIT license. Text and other assets copyright
-General Assembly, Inc., all rights reserved.
+#### One Final Note
+To start your first game, please click the Log/Start Game button in order to initialize game rules and to keep game stats.
+To restart or play a new game, please click new game.

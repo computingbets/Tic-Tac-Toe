@@ -219,7 +219,7 @@ const addHandlers = () => {
   $('.col-xs-4').on('click', onMove);
   // $('.col-xs-4').on('click', onUpdateGame);
   $('#create-game').on('click', onCreateGame);
-  $('#new-game').on('click', onNewGame)
+  $('#new-game').on('click', onNewGame);
   $('#stats').on('click', onStats);
 };
  // $('.col-xs-4').text("");
