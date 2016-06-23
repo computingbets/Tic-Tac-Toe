@@ -71,7 +71,7 @@ const onCreateGame = function (event) {
 
 const onStats = function (event) {
   event.preventDefault();
-  console.log('StatS!');
+  // console.log('StatS!');
   api.getStats()
   .done(ui.statsSuccess)
   .fail(ui.failure);
@@ -79,25 +79,20 @@ const onStats = function (event) {
 
 const onGameOver = function () {
   $('.col-xs-4').off('click');
-  console.log('gameoverstarts');
+  // console.log('gameoverstarts');
   api.gameOver()
   .done(ui.success)
   .fail(ui.failure);
-  console.log('gameOverEnds');
+  // console.log('gameOverEnds');
 };
 
 const onNewGame = function (event) {
   event.preventDefault();
   $('.col-xs-4').on('click', onMove);
-  console.log("this is a new game");
-  console.log("winner is ", winner);
-  console.log("turn is ", turn);
-  console.log("boardValue is ", boardValue);
   winner = false;
     boardValue = ['', '', '', '', '', '', '', '', ''];
     turn = 0;
     boardValueIndex = '';
-  // console.log('newgame');
   $('.col-xs-4').text('');
   $('.col-xs-4').removeClass('gameOver');
   //addHandlers();
@@ -107,24 +102,19 @@ const onNewGame = function (event) {
 };
 
 const setTileValue = function (tileId) {
-  //console.log('setting value');
   if (turn % 2 === 0) {
    $('#'+tileId).text('X');
   } else  {
    $('#'+tileId).text('O');
   }
   turn++;
-  console.log('turn is ', turn);
-  // onUpdateGame(id, val);
 };
 const onMove = function (event) {
   event.preventDefault();
   let id = $(event.target).attr("id");
-  console.log('id is' + id);
 
   setTileValue(id);
   let val = $(event.target).text();
-  console.log('val is ' + val);
   addToArray(id, val);
   onUpdateGame();
   referee(boardValue);

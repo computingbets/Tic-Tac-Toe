@@ -82,8 +82,8 @@ const getStats = function() {
 };
 
 const gameOver = function() {
-  console.log("You're inside gameOver");
-  console.log("app.game is ", app.game);
+  // console.log("You're inside gameOver");
+  // console.log("app.game is ", app.game);
   return $.ajax({
     url: app.host + '/games/' + app.game.id,
     method: 'PATCH',

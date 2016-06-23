@@ -27,9 +27,9 @@ const signOutSuccess = function (){
 };
 
 const createSuccess = function(data) {
-  console.log(data.game);
+  //console.log(data.game);
   app.game = data.game;
-  console.log('we up in createSuccess')
+  //console.log('we up in createSuccess')
   //$('#game-board').val(createdGame);
 };
 
