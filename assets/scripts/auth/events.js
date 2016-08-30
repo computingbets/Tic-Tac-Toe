@@ -93,7 +93,7 @@ const onNewGame = function (event) {
     boardValue = ['', '', '', '', '', '', '', '', ''];
     turn = 0;
     boardValueIndex = '';
-  $('.col-xs-4').text('');
+  $('.col-xs-4').html("");
   $('.col-xs-4').removeClass('gameOver');
   //addHandlers();
   api.createGame()
@@ -118,6 +118,7 @@ const onMove = function (event) {
   addToArray(id, val);
   onUpdateGame();
   referee(boardValue);
+  addOrange();
   moveTaken(id, val);
   // boardOff();
   // keepBoardOff();
@@ -193,23 +194,18 @@ const referee = function (boardValue) {
 //      console.log(gameBoard);
 //    return winner;
 };
+function addOrange () {
+if ($('div#0').val() === 'X'){
+  console.log('x2orange');
+  ($('div#0').addClass('orange'));
+}
+}
+function addApple(){
+  if ($('div#1').val()==='O'){
+  ($('div#1').addClass('apple'));
+}
+}
 
-// const boardOff =  function () {
-//   // let game = 'fun';
-//   if (winner) {
-//   $('.col-xs-4').addClass('gameOver');
-// //   console.log($('.col-xs-4'));
-//
-// //  } else {
-// //    let game = 'funn';
-//  }
-//  };
-
-// const keepBoardOff = function () {
-//   if ($('.col-xs-4').hasClass('gameOver')){
-//    $('.gameOver').off('click');
-//  }
-// };
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
