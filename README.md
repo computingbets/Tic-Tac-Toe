@@ -1,6 +1,6 @@
 ![General Assembly Logo](http://i.imgur.com/ke8USTq.png)
 
-## John Staley aka logicmyth's client project one!
+## John Staley's aka logicmyth's client project one!
 
 #### What App This Is
 This app is a single page aplication that features a tic-tac-toe game. In addition, it features sign-in, sign-out, password features, retrieval of game stats, and database storage of player moves and each individual game.
